@@ -1,4 +1,4 @@
-# DQN Breakout — Group Hyperparameter Sweep
+# DQN Breakout — Group Hyperparameter Experiment
 **Formative 3 · Deep Q-Learning · Stable Baselines 3 + Gymnasium**
 
 ---
