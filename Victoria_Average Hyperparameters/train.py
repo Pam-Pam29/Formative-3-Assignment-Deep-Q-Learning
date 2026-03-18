@@ -43,11 +43,6 @@ EXPERIMENTS = [
     dict(exp=10, lr=0.0002, gamma=0.99, batch=32, eps_start=1.0, eps_end=0.02, eps_frac=0.15),
 ]
 
-BEST_CONFIG = dict(
-    exp=11, lr=0.0001, gamma=0.98, batch=64,
-    eps_start=1.0, eps_end=0.01, eps_frac=0.15,
-)
-
 
 def make_env(seed):
     env = make_atari_env(ENV_ID, n_envs=1, seed=seed)
@@ -160,9 +155,9 @@ def run_experiment(cfg, tag=None, buffer_size=100_000, optimize_memory=False):
     }
 
 
-# ── Run 10 experiments ────────────────────────────────────────────────────────
+# ── Run 10 experiments 
 print("=" * 60)
-print("  DQN Breakout — 10-Experiment Hyperparameter Sweep")
+print("  DQN Breakout — 10-Experiment Hyperparameter ")
 print(f"  Environment : {ENV_ID}")
 print(f"  Timesteps   : {TOTAL_TIMESTEPS:,} per experiment")
 print("=" * 60)
@@ -172,7 +167,7 @@ for cfg in EXPERIMENTS:
     row = run_experiment(cfg)
     summary_rows.append(row)
 
-# ── Summary table ─────────────────────────────────────────────────────────────
+# ── Summary table 
 print("\n" + "=" * 60)
 print("  All 10 Experiments Complete")
 print("=" * 60)
@@ -197,7 +192,7 @@ print(f"\n  Summary CSV → {summary_csv}")
 best10 = max(summary_rows, key=lambda x: x["mean_reward"])
 print(f"\n  Best of 10: Exp {best10['exp']:02d} — {best10['mean_reward']:.2f}")
 
-# ── Run optimised experiment ──────────────────────────────────────────────────
+# ── Run optimised experiment 
 print("\n" + "=" * 60)
 print("  Running Final Optimised Experiment [expBEST]")
 print("  Hyperparameters derived from sweep results")
@@ -211,7 +206,7 @@ best_row = run_experiment(
 )
 summary_rows.append(best_row)
 
-# ── Select and save overall best model ───────────────────────────────────────
+# ── Select and save overall best model 
 overall_best = max(summary_rows, key=lambda x: x["mean_reward"])
 best_tag     = overall_best["tag"]
 best_src     = f"./models/dqn_{best_tag}.zip"
