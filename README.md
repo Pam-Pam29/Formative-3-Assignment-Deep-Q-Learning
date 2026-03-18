@@ -69,10 +69,10 @@ Run `compare.py` to reproduce these results.
 
 | Policy | Mean Reward | Std | Notes |
 |---|---|---|---|
-| CnnPolicy | [INSERT] | [INSERT] | Standard for pixel-based RL |
-| MlpPolicy | [INSERT] | [INSERT] | Flattens pixels — loses spatial structure |
+| CnnPolicy | 13.20 | 5.00 | Standard for pixel-based RL |
+| MlpPolicy | 4.60 |1.74 | Flattens pixels — loses spatial structure |
 
-
+**Both policies were trained for 100,000 steps using the same hyperparameters (lr=0.0001, gamma=0.98, batch=64). CnnPolicy scored 13.20 vs MlpPolicy's 4.60 — a difference of +8.60. MlpPolicy peaked at 25K steps (6.60) then declined to 4.60, confirming it cannot learn effectively from raw pixels. CNNPolicy improved consistently across all 4 checkpoints, reaching 13.90 at 75K before settling at 13.20.**
 ---
 
 ## Hyperparameter Tuning — All 30 Experiments
