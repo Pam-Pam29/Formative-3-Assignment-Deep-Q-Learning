@@ -1,15 +1,7 @@
 """
-================================================
   train.py — DQN Breakout
   10 Experiments with Moderate Hyperparameters
   Stable Baselines 3 + Gymnasium
-  All fixes applied:
-    - ALE registration
-    - VecTransposeImage on both envs (no type mismatch)
-    - optimize_memory_usage=False (no buffer conflict)
-    - Single np.load call (no double-load bug)
-    - Immediate download link after each experiment
-================================================
 """
 
 import os
@@ -28,10 +20,10 @@ from stable_baselines3.common.callbacks import (
 )
 from IPython.display import FileLink, display
 
-# ── Register ALE environments ─────────────────────────────────────────────────
+# ── Register ALE environments 
 gym.register_envs(ale_py)
 
-# ── Output Dirs ───────────────────────────────────────────────────────────────
+# ── Output Dirs 
 MODEL_DIR      = "./models"
 CHECKPOINT_DIR = "./checkpoints"
 EVAL_LOG_DIR   = "./eval_logs"
@@ -45,7 +37,7 @@ ENV_ID          = "ALE/Breakout-v5"
 SEED            = 42
 TOTAL_TIMESTEPS = 500_000
 
-# ── 10 Moderate Experiment Configs ────────────────────────────────────────────
+# ── 10 Moderate Experiment Configs 
 #
 #  All values stay in a moderate range:
 #  lr          : 0.0001 - 0.0003  (no extremes)
@@ -68,7 +60,7 @@ EXPERIMENTS = [
     dict(exp=10, lr=0.0002, gamma=0.99, batch=32, eps_start=1.0, eps_end=0.02, eps_frac=0.15),
 ]
 
-# ── Consistent env wrapper stack ──────────────────────────────────────────────
+# ── Consistent env wrapper stack 
 def make_env(seed):
     """Same wrapper stack for train and eval — prevents type mismatch warning."""
     env = make_atari_env(ENV_ID, n_envs=1, seed=seed)
@@ -77,7 +69,7 @@ def make_env(seed):
     return env
 
 
-# ── Single experiment runner ──────────────────────────────────────────────────
+# ── Single experiment runner 
 def run_experiment(cfg):
     exp_id       = cfg["exp"]
     tag          = f"exp{exp_id:02d}"
@@ -209,7 +201,7 @@ def run_experiment(cfg):
     }
 
 
-# ── Run All 10 Experiments ────────────────────────────────────────────────────
+# ── Run All 10 Experiments 
 print("=" * 60)
 print("  DQN Breakout — 10 Experiment Hyperparameter Sweep")
 print(f"  Environment : {ENV_ID}")
@@ -222,7 +214,7 @@ for cfg in EXPERIMENTS:
     row = run_experiment(cfg)
     summary_rows.append(row)
 
-# ── Save Master Summary CSV ───────────────────────────────────────────────────
+# ── Save Master Summary CSV 
 summary_csv = os.path.join(LOG_DIR, "experiment_summary.csv")
 fieldnames  = ["exp", "lr", "gamma", "batch",
                "eps_start", "eps_end", "eps_frac",
@@ -233,7 +225,7 @@ with open(summary_csv, "w", newline="") as f:
     writer.writeheader()
     writer.writerows(summary_rows)
 
-# ── Copy best model as dqn_model.zip for play.py ─────────────────────────────
+# ── Copy best model as dqn_model.zip to be verified as a best model for play.py 
 best     = max(summary_rows, key=lambda x: x["mean_reward"])
 best_tag = f"exp{best['exp']:02d}"
 best_src = os.path.join(MODEL_DIR, f"dqn_{best_tag}.zip")
@@ -242,7 +234,7 @@ if os.path.exists(best_src):
     shutil.copy(best_src, best_dst)
     print(f"\n  Best model copied → {best_dst}")
 
-# ── Print Final Summary Table ─────────────────────────────────────────────────
+# ── Print Final Summary Table 
 print("\n" + "=" * 60)
 print("  All 10 Experiments Complete — Summary")
 print("=" * 60)
@@ -267,10 +259,10 @@ print(f"  Mean Reward     : {best['mean_reward']:.2f}")
 print(f"  Config          : lr={best['lr']} gamma={best['gamma']} "
       f"batch={best['batch']} eps_end={best['eps_end']} eps_frac={best['eps_frac']}")
 
-# ── Final download links ──────────────────────────────────────────────────────
+# ── Final download links
 print("\n  Download summary:")
 display(FileLink(summary_csv))
 print("  Download best model:")
 display(FileLink(best_dst))
 
-print("\n  Done! Run play.py next using dqn_model.zip.")
+print("\n  Done!.")
