@@ -22,7 +22,7 @@
 ---
 
 ## Gameplay Video
-📹 [Watch Gameplay Video](Victoria_Average%20Hyperparameters/Gameplay%20Videos/breakout_ep1-episode-0.mp4)
+📹 **[Watch Gameplay Video](https://github.com/Pam-Pam29/Formative-3-Assignment-Deep-Q-Learning/raw/main/Victoria_Average%20Hyperparameters/Gameplay%20Videos/breakout_ep1-episode-0.mp4)**
 > *(Recorded using play.py — Mean Reward: 27.40 · Max Reward: 34.0)*
 
 ---
