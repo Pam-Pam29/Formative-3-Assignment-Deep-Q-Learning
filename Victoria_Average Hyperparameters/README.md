@@ -153,7 +153,7 @@ Mean Reward: 31.80  (= human baseline of 31.8)
 
 ## Agent Performance — play.py Results
 
-Model tested over 5 episodes using deterministic=True (GreedyQPolicy):
+Model tested over 20 episodes using deterministic=True (GreedyQPolicy):
 
 | Episode | Reward | Steps | Notes |
 |---|---|---|---|
@@ -161,12 +161,28 @@ Model tested over 5 episodes using deterministic=True (GreedyQPolicy):
 | 2 | 15.0 | 151 | Worst episode — lost lives quickly |
 | 3 | 28.0 | 262 | Solid — near human level |
 | 4 | 28.0 | 271 | Solid — consistent |
-| 5 | 32.0 | 314 | Strong — close to human level |
-| **Mean** | **27.40** | **268** | **16x better than random (1.7)** |
+| 5 | 32.0 | 314 | **Beat human baseline (31.8)** |
+| 6 | 24.0 | 229 | Above mean |
+| 7 | 33.0 | 317 | **Beat human baseline (31.8)** |
+| 8 | 18.0 | 188 | Below mean — unlucky ball angle |
+| 9 | 22.0 | 229 | Consistent |
+| 10 | 28.0 | 260 | Solid |
+| 11 | 29.0 | 294 | Solid |
+| 12 | 28.0 | 269 | Solid |
+| 13 | 21.0 | 216 | Consistent |
+| 14 | 24.0 | 216 | Above mean |
+| 15 | 24.0 | 243 | Above mean |
+| 16 | 21.0 | 219 | Consistent |
+| 17 | 24.0 | 236 | Above mean |
+| 18 | 22.0 | 205 | Consistent |
+| 19 | 19.0 | 199 | Below mean |
+| 20 | 28.0 | 284 | Solid |
+| **Mean** | **25.10** | **247** | **15x better than random (1.7)** |
 
-The agent destroyed an average of 27 bricks per game. Episode 1 exceeded human baseline
-at only 500K training steps (approximately 4% of a full DQN training run).
-
+The agent destroyed an average of 25 bricks per game over 20 episodes.
+3 out of 20 episodes beat the human baseline of 31.8 (ep1: 34.0, ep5: 32.0, ep7: 33.0).
+Episode 1 peaked at 34.0 — exceeding human level at only 500K training steps
+(approximately 4% of a full DQN training run).
 ---
 
 ## How to Run
