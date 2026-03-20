@@ -1,4 +1,4 @@
-# DQN Breakout — Victoria's Hyperparameter Experiment
+# DQN Breakout — Victoria's Hyperparameter Experiments
 **Formative 3 · Deep Q-Learning · Stable Baselines 3 + Gymnasium**
 
 ---
