@@ -22,7 +22,10 @@
 ---
 
 ## Gameplay Video
-📹 **[Watch Gameplay Video](https://github.com/Pam-Pam29/Formative-3-Assignment-Deep-Q-Learning/raw/main/Victoria_Average%20Hyperparameters/Gameplay%20Videos/breakout_ep1-episode-0.mp4)**
+[![Watch DQN Breakout Agent](https://img.youtube.com/vi/sXjg4H0J6nQ/0.jpg)](https://youtube.com/shorts/sXjg4H0J6nQ)
+
+> Episode 1 — Reward: 34.0 · 
+> Trained with exp02: lr=0.0001 · gamma=0.98 · batch=64 · 500K steps
 > *(Recorded using play.py — Mean Reward: 27.40 · Max Reward: 34.0)*
 
 ---
