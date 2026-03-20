@@ -22,8 +22,7 @@
 ---
 
 ## Gameplay Video
-
-> 📹 **[INSERT VIDEO LINK HERE]**
+📹 [Watch Gameplay Video](Victoria_Average%20Hyperparameters/Gameplay%20Videos/breakout_ep1-episode-0.mp4)
 > *(Recorded using play.py — Mean Reward: 27.40 · Max Reward: 34.0)*
 
 ---
