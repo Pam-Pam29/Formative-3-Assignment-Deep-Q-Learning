@@ -19,7 +19,7 @@ from gymnasium.wrappers import RecordVideo
 
 gym.register_envs(ale_py)
 
-MODEL_PATH = "./models/dqn_model.zip"
+MODEL_PATH = "./Best Model/dqn_model.zip"
 ENV_ID     = "ALE/Breakout-v5"
 N_EPISODES = 20             
 RECORD_DIR = "./videos/gameplay"
