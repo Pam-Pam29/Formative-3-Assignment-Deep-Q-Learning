@@ -1,12 +1,3 @@
-"""
-================================================
-  train.py — DQN Breakout
-  Group Assignment — Unified Training Script
-  Members: Erneste, Victoria, Pretty
-  Stable Baselines 3 + Gymnasium
-================================================
-"""
-
 import os
 import csv
 import json
