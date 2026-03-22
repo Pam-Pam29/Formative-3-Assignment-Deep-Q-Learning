@@ -8,7 +8,7 @@
 | Member | Role | Hyperparameter Range |
 |---|---|---|
 | **Victoria Fakunle** | Average Hyperparameters | lr=0.0001–0.0003, γ=0.97–0.99, batch=32–64 |
-| **Pretty** | Lower Hyperparameters | *(fill in range)* |
+| **Pretty** | Lower Hyperparameters |lr=0.00001–0.0001, γ=0.9–0.99, batch=32–64|
 | **Erneste** | Higher Hyperparameters | lr=0.0005–0.001, γ=0.99–0.999, batch=128–256 |
 
 ---
