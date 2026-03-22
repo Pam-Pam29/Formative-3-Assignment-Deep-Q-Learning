@@ -28,7 +28,8 @@
 
 ## Gameplay Video
 
-[![Watch DQN Breakout Agent](https://youtu.be/4DOHCFK_vuE)
+[![Watch DQN Breakout Agent Live](https://img.youtube.com/vi/4DOHCFK_vuE/hqdefault.jpg)](https://youtu.be/4DOHCFK_vuE)
+
 
 > Best episode — Reward: 34.0 · Beats human baseline (31.8)
 > Recorded using play.py with Victoria's exp02 model (group best · 31.80 mean reward)
