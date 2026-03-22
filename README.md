@@ -9,7 +9,7 @@
 |---|---|---|
 | **Victoria Fakunle** | Average Hyperparameters | lr=0.0001–0.0003, γ=0.97–0.99, batch=32–64 |
 | **Diane** | Lower Hyperparameters | *(fill in range)* |
-| **Erneste** | Higher Hyperparameters | *(fill in range)* |
+| **Erneste** | Higher Hyperparameters | lr=0.0005–0.001, γ=0.99–0.999, batch=128–256 |
 
 ---
 
@@ -123,18 +123,18 @@ Run `compare.py` to reproduce these results.
 
 | # | lr | γ | batch | eps_start | eps_end | eps_frac | Mean Reward | Std | Peak | Noted Behavior |
 |---|---|---|---|---|---|---|---|---|---|---|
-| exp01 | | | | | | | | | | |
-| exp02 | | | | | | | | | | |
-| exp03 | | | | | | | | | | |
-| exp04 | | | | | | | | | | |
-| exp05 | | | | | | | | | | |
-| exp06 | | | | | | | | | | |
-| exp07 | | | | | | | | | | |
-| exp08 | | | | | | | | | | |
-| exp09 | | | | | | | | | | |
-| exp10 | | | | | | | | | | |
+| exp01 | 0.0005 | 0.990 | 128 | 1.0 | 0.10 | 0.15 | 26.70 | 8.16 | 26.70 | Reward improving across training. |
+| exp02 | 0.0005 | 0.995 | 128 | 1.0 | 0.10 | 0.20 | 23.85 | 8.90 | 24.80 | Reward improving across training. |
+| exp03 | 0.0005 | 0.999 | 256 | 1.0 | 0.10 | 0.20 | 23.45 | 7.52 | 23.65 | Reward flat — may need more timesteps. |
+| exp04 | 0.0007 | 0.990 | 128 | 1.0 | 0.10 | 0.15 | 23.45 | 6.74 | 29.25 | Reward declined — possible instability. |
+| exp05 | 0.0007 | 0.995 | 256 | 1.0 | 0.10 | 0.20 | 23.25 | 6.68 | 24.75 | Reward flat — may need more timesteps. |
+| exp06 | 0.0007 | 0.999 | 256 | 1.0 | 0.15 | 0.25 | 23.70 | 7.41 | 24.45 | Reward improving across training. |
+| exp07 | 0.0010 | 0.990 | 128 | 1.0 | 0.10 | 0.15 | 27.05 | 5.54 | 27.05 | Reward improving across training. |
+| exp08 | 0.0010 | 0.995 | 256 | 1.0 | 0.15 | 0.25 | **27.80** | 7.51 | 30.90 | **Best for Erneste — high batch size helped stability** |
+| exp09 | 0.0010 | 0.999 | 256 | 1.0 | 0.15 | 0.30 | 18.30 | 6.72 | 26.30 | Reward declined — possible instability. |
+| exp10 | 0.0007 | 0.999 | 128 | 1.0 | 0.10 | 0.25 | 21.30 | 8.20 | 28.25 | Reward declined — possible instability. |
 
-**Erneste's best:** *(fill in after running)*
+**Erneste's best:** exp08 — Mean Reward **27.80**
 
 ---
 
@@ -144,8 +144,8 @@ Run `compare.py` to reproduce these results.
 |---|---|---|---|
 | Victoria Fakunle | exp02 | 31.80 | Victoria_Average Hyperparameters/models/ |
 | Diane | [INSERT] | [INSERT] | Diane_Lower Hyperparameters/models/ |
-| Erneste | [INSERT] | [INSERT] | Erneste_Higher Hyperparameters/models/ |
-| **Group best** | **[INSERT]** | **[INSERT]** | **Best_Model/dqn_model.zip** |
+| Erneste | exp08 | 27.80 | Erneste_Higher Hyperparameters/models/ |
+| **Group best** | **Victoria exp02** | **31.80** | **Best_Model/dqn_model.zip** |
 
 > The winning model is copied to `Best_Model/dqn_model.zip` and used by `play.py`.
 
@@ -177,7 +177,17 @@ Run `compare.py` to reproduce these results.
 
 ### Erneste — Higher Hyperparameters
 
-> *(Fill in: which hyperparams improved performance, which harmed it, best config and why)*
+**What improved performance:**
+- `batch=256` significantly improved gradient stability compared to smaller batch sizes in the average sweep.
+- Higher learning rate (`lr=0.0010`) combined with larger batches allowed faster convergence without overshooting.
+- `γ=0.995` provided a better balance for long-term planning than γ=0.990 in this higher range.
+
+**What harmed performance:**
+- `γ=0.999` remains difficult to train at 500K steps, often leading to performance dips or flat rewards.
+- Conservative exploration (`eps_frac=0.30`) slowed down the policy's ability to capitalize on learned strategies.
+- Instability was observed at high learning rates if the batch size was not sufficiently large.
+
+**Best config:** `lr=0.0010, γ=0.995, batch=256, eps_end=0.15, eps_frac=0.25` → Mean Reward **27.80** (Peak 30.90)
 
 ---
 
@@ -219,7 +229,7 @@ python compare.py
 |---|---|
 | **Victoria Fakunle** | train.py (average hyperparams), compare.py, 10 experiments, repo setup, README |
 | **Diane** | train.py (lower hyperparams), 10 experiments *(add detail)* |
-| **Erneste** | train.py (higher hyperparams), 10 experiments *(add detail)* |
+| **Erneste** | train.py (higher hyperparams), 10 experiments, play.py, README |
 
 ---
 
