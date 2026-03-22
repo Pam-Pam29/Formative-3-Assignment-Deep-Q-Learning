@@ -8,7 +8,7 @@
 | Member | Role | Hyperparameter Range |
 |---|---|---|
 | **Victoria Fakunle** | Average Hyperparameters | lr=0.0001–0.0003, γ=0.97–0.99, batch=32–64 |
-| **Diane** | Lower Hyperparameters | *(fill in range)* |
+| **Pretty** | Lower Hyperparameters | *(fill in range)* |
 | **Erneste** | Higher Hyperparameters | lr=0.0005–0.001, γ=0.99–0.999, batch=128–256 |
 
 ---
@@ -44,8 +44,8 @@
 │   ├── models/
 │   └── Logs/
 │
-├── Diane_Lower Hyperparameters/
-│   ├── train.py                             # Diane's 10 experiments
+├── Pretty_Lower Hyperparameters/
+│   ├── train.py                             # Pretty's 10 experiments
 │   ├── models/
 │   └── Logs/
 │
@@ -100,22 +100,24 @@ Run `compare.py` to reproduce these results.
 
 ---
 
-### Diane — Lower Hyperparameters
+### Pretty — Lower Hyperparameters
 
-| # | lr | γ | batch | eps_start | eps_end | eps_frac | Mean Reward | Std | Peak | Noted Behavior |
-|---|---|---|---|---|---|---|---|---|---|---|
-| exp01 | | | | | | | | | | |
-| exp02 | | | | | | | | | | |
-| exp03 | | | | | | | | | | |
-| exp04 | | | | | | | | | | |
-| exp05 | | | | | | | | | | |
-| exp06 | | | | | | | | | | |
-| exp07 | | | | | | | | | | |
-| exp08 | | | | | | | | | | |
-| exp09 | | | | | | | | | | |
-| exp10 | | | | | | | | | | |
 
-**Diane's best:** *(fill in after running)*
+| Experiment | Timesteps | Final Mean Reward | Peak Mean Reward | Noted Behaviour |
+| :--- | :--- | :--- | :--- | :--- |
+| **Exp 01** | 100,000 | 2.4 | 2.4 | Extremely slow learning; minimal improvement throughout the run. [cite: 10] |
+| **Exp 02** | 100,000 | 2.6 | 5.0 | Initial promise at 40k, but performance dropped significantly thereafter. [cite: 11] |
+| **Exp 03** | 100,000 | 5.4 | 6.2 | Strong initial start (6.2 at 20k) but highly unstable, dropping as low as 1.0. [cite: 12] |
+| **Exp 04** | 100,000 | 8.4 | 8.4 | Consistent but slow improvement; reached its peak at the very end. [cite: 13] |
+| **Exp 05** | 100,000 | 7.0 | 11.2 | Reached a high peak at 80k but suffered from performance degradation in the final 20k steps. [cite: 14] |
+| **Exp 06** | 100,000 | 12.6 | 12.6 | Strong final performance, though it experienced a notable dip in rewards around 80k. [cite: 15] |
+| **Exp 07** | 100,000 | 4.0 | 12.6 | Highest potential mid-run (12.6 at 60k) but suffered a catastrophic collapse in reward by 100k. [cite: 16] |
+| **Exp 08** | 100,000 | 10.4 | 10.4 | Demonstrates very steady and stable growth throughout the training session. [cite: 17] |
+| **Exp 09 (BEST)** | 500,000 | 23.8 | 23.8 | Outstanding performance; sustained learning over a longer duration, achieving the highest reward. [cite: 19] |
+| **Exp 10** | 100,000 | 8.8 | 8.8 | Modest but consistent growth, showing similar stability to Exp 08. [cite: 18] |
+
+
+**Pretty's best:** exp09 — Mean Reward **23.8**
 
 ---
 
@@ -143,7 +145,7 @@ Run `compare.py` to reproduce these results.
 | Member | Best Exp | Mean Reward | Model Location |
 |---|---|---|---|
 | Victoria Fakunle | exp02 | 31.80 | Victoria_Average Hyperparameters/models/ |
-| Diane | [INSERT] | [INSERT] | Diane_Lower Hyperparameters/models/ |
+| Pretty Ntakirutiman | exp09 | 23.8 | Pretty_Lower Hyperparameters/models/ |
 | Erneste | exp08 | 27.80 | Erneste_Higher Hyperparameters/models/ |
 | **Group best** | **Victoria exp02** | **31.80** | **Best_Model/dqn_model.zip** |
 
@@ -169,7 +171,7 @@ Run `compare.py` to reproduce these results.
 
 ---
 
-### Diane — Lower Hyperparameters
+### Pretty — Lower Hyperparameters
 
 > *(Fill in: which hyperparams improved performance, which harmed it, best config and why)*
 
@@ -204,8 +206,8 @@ AutoROM --accept-license
 # Victoria
 python "Victoria_Average Hyperparameters/train.py"
 
-# Diane
-python "Diane_Lower Hyperparameters/train.py"
+# Pretty
+python "Pretty_Lower Hyperparameters/train.py"
 
 # Erneste
 python "Erneste_Higher Hyperparameters/train.py"
@@ -228,7 +230,7 @@ python compare.py
 | Member | Contribution |
 |---|---|
 | **Victoria Fakunle** | train.py (average hyperparams), compare.py, 10 experiments, repo setup, README |
-| **Diane** | train.py (lower hyperparams), 10 experiments *(add detail)* |
+| **Pretty** | train.py (lower hyperparams), 10 experiments *(add detail)* |
 | **Erneste** | train.py (higher hyperparams), 10 experiments, play.py, README |
 
 ---
