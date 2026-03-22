@@ -19,28 +19,30 @@ from gymnasium.wrappers import RecordVideo
 
 gym.register_envs(ale_py)
 
-MODEL_PATH = "./Best Model/dqn_model.zip"
+MODEL_PATH = ".\models\dqn_exp02.zip"
 ENV_ID     = "ALE/Breakout-v5"
-N_EPISODES = 20             
+N_EPISODES = 5
 RECORD_DIR = "./videos/gameplay"
 SEED       = 42
 
 os.makedirs(RECORD_DIR, exist_ok=True)
-os.makedirs("./models", exist_ok=True)
 
 print("=" * 60)
-print("  DQN Breakout — Play Mode")
+print("  DQN Breakout — Group Play")
+print("  Model: models/dqn_exp02.zip")
+print("  Victoria exp02 — Mean Reward 31.80")
 print("=" * 60)
 print(f"\n  Loading model from: {MODEL_PATH}")
 
 if not os.path.exists(MODEL_PATH):
     print(f"\n  ERROR: Model not found at {MODEL_PATH}")
+    print("  Make sure models/dqn_exp02.zip exists in the repo root.")
     exit(1)
 
 model = DQN.load(MODEL_PATH)
 print("  Model loaded successfully ✓")
 print(f"\n  Playing {N_EPISODES} episodes...")
-print(f"  Recording to {RECORD_DIR}/\n")
+print(f"  Live window + recording to {RECORD_DIR}/\n")
 
 print(f"  {'Episode':>8} {'Reward':>10} {'Steps':>8} {'Duration':>10}")
 print(f"  {'-'*8} {'-'*10} {'-'*8} {'-'*10}")
@@ -50,12 +52,13 @@ episode_lengths = []
 
 for ep in range(N_EPISODES):
 
-    # ── Eval env — exact training wrapper stack
-    eval_env = make_atari_env(ENV_ID, n_envs=1, seed=SEED + ep)
+    # ── Eval env — render_mode=human shows live game window ───────────────────
+    eval_env = make_atari_env(ENV_ID, n_envs=1, seed=SEED + ep,
+                              env_kwargs={"render_mode": "human"})
     eval_env = VecFrameStack(eval_env, n_stack=4)
     eval_env = VecTransposeImage(eval_env)
 
-    # ── Record env — raw env for video only 
+    # ── Record env — raw env for saving video ─────────────────────────────────
     record_env = RecordVideo(
         gym.make(ENV_ID, render_mode="rgb_array"),
         video_folder    = RECORD_DIR,
@@ -71,10 +74,11 @@ for ep in range(N_EPISODES):
     start        = time.time()
 
     while True:
-        action, _ = model.predict(obs, deterministic=True)
+        action, _ = model.predict(obs, deterministic=True)  # GreedyQPolicy
         obs, reward, done, info = eval_env.step(action)
+        eval_env.render()  # shows live game window
 
-        # Mirror to record env for video
+        # Mirror action to record env for video
         try:
             record_env.step(int(action[0]))
         except Exception:
@@ -83,7 +87,7 @@ for ep in range(N_EPISODES):
         total_reward += float(reward[0])
         steps        += 1
 
-        # Get lives — true game over when lives reach 0
+        # True game over when lives reach 0
         current_lives = info[0].get("lives", None)
         if lives is None:
             lives = current_lives
@@ -103,12 +107,18 @@ for ep in range(N_EPISODES):
 
     print(f"  {ep+1:>8} {total_reward:>10.1f} {steps:>8} {duration:>9.1f}s")
 
+# ── Summary ───────────────────────────────────────────────────────────────────
 print(f"\n  {'='*50}")
 print(f"  Results over {N_EPISODES} episodes:")
 print(f"  Mean Reward : {np.mean(episode_rewards):.2f}")
 print(f"  Std Reward  : {np.std(episode_rewards):.2f}")
 print(f"  Max Reward  : {np.max(episode_rewards):.2f}")
+print(f"  Min Reward  : {np.min(episode_rewards):.2f}")
 print(f"  Mean Steps  : {np.mean(episode_lengths):.0f}")
+print(f"  Human baseline : 31.8")
+print(f"  Random baseline: 1.7")
+above = sum(1 for r in episode_rewards if r >= 31.8)
+print(f"  Episodes above human baseline: {above} / {N_EPISODES}")
 print(f"  {'='*50}")
 print(f"\n  Videos saved → {RECORD_DIR}/")
 print("\n  Done!")
