@@ -34,6 +34,17 @@
 > Best episode — Reward: 34.0 · Beats human baseline (31.8)
 > Recorded using play.py with Victoria's exp02 model (group best · 31.80 mean reward)
 
+## play.py Terminal Output
+
+**Model loading and first episodes:**
+
+![play.py start](videos/gameplay/play_output_start.png)
+
+**All 20 episodes and final summary:**
+
+![play.py results](videos/gameplay/play_output_end.png)
+
+> Mean Reward: 25.10 · Std: 4.97 · Max: 34.00 · 3/20 episodes beat human baseline (31.8)
 ---
 
 ## Repository Structure
