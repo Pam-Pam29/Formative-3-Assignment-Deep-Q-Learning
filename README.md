@@ -44,20 +44,28 @@ Formative-3-Assignment-Deep-Q-Learning/
 ├── play.py                                  # Shared — loads group best model
 ├── compare.py                               # Shared — MLP vs CNN comparison
 │
-├── Best_Model/
+├── Best Model/
 │   └── dqn_model.zip                        # Group best model — Victoria exp02
+│
+├── videos/
+│   └── gameplay/
+│       └── breakout_ep01–20.mp4             # Recorded by root play.py
 │
 ├── Victoria_Average Hyperparameters/
 │   ├── train.py                             # Victoria's 10 experiments
+│   ├── play.py                              # Victoria's individual play script
 │   ├── Best Model/
 │   │   └── dqn_model.zip                    # Victoria's best model
 │   ├── models/
 │   │   └── dqn_exp01–10.zip + dqn_expBEST.zip
-│   └── Logs/
-│       └── experiment_summary.csv + exp01–10_reward_log.csv + mlp_vs_cnn_comparison.csv
+│   ├── Logs/
+│   │   └── experiment_summary.csv + exp01–10_reward_log.csv + mlp_vs_cnn_comparison.csv
+│   └── Gameplay Videos/
+│       └── breakout_ep1-episode-0.mp4
 │
 ├── Pretty_Lower Hyperparameters/
 │   ├── train.py                             # Pretty's 10 experiments
+│   ├── play.py                              # Pretty's individual play script
 │   ├── models/
 │   │   └── dqn_model.zip + dqn_exp01–10.zip
 │   └── logs/
@@ -65,6 +73,7 @@ Formative-3-Assignment-Deep-Q-Learning/
 │
 └── Erneste_Higher Hyperparameters/
     ├── train.py                             # Erneste's 10 experiments
+    ├── play.py                              # Erneste's individual play script
     ├── models/
     │   └── dqn_model.zip + dqn_exp01–10.zip
     └── logs/
@@ -171,7 +180,7 @@ Both policies were trained for 100,000 steps using the same hyperparameters (lr=
 ### Victoria Fakunle — Average Hyperparameters
 
 **What improved performance:**
-- `lr=0.0001` consistently outperformed higher learning rates. Conservative LR prevents overshooting at a 500K step budget.
+- `lr=0.0001` consistently outperformed higher learning rates. Conservative lr prevents overshooting at a 500K step budget.
 - `γ=0.98` was the sweet spot. γ=0.97 was too myopic for Breakout's multi-step rally rewards; γ=0.99 caused Q-value overestimation before the network had enough data.
 - `batch=64` reduced variance vs batch=32. Larger batches produce smoother gradient updates and more stable policies.
 
@@ -222,25 +231,25 @@ Model tested over 20 episodes using Victoria's exp02 (group best), deterministic
 | Episode | Reward | Steps | Notes |
 |---|---|---|---|
 | 1 | 34.0 | 342 | **Beat human baseline (31.8)** |
-| 2 | 15.0 | 151 | Worst episode — lost lives quickly |
-| 3 | 28.0 | 262 | Solid — near human level |
-| 4 | 28.0 | 271 | Solid — consistent |
+| 2 | 15.0 | 151 | Below mean — worst episode, lost lives quickly |
+| 3 | 28.0 | 262 | Above mean — near human level |
+| 4 | 28.0 | 271 | Above mean — consistent |
 | 5 | 32.0 | 314 | **Beat human baseline (31.8)** |
-| 6 | 24.0 | 229 | Above mean |
+| 6 | 24.0 | 229 | Below mean |
 | 7 | 33.0 | 317 | **Beat human baseline (31.8)** |
 | 8 | 18.0 | 188 | Below mean — unlucky ball angle |
-| 9 | 22.0 | 229 | Consistent |
-| 10 | 28.0 | 260 | Solid |
-| 11 | 29.0 | 294 | Solid |
-| 12 | 28.0 | 269 | Solid |
-| 13 | 21.0 | 216 | Consistent |
-| 14 | 24.0 | 216 | Above mean |
-| 15 | 24.0 | 243 | Above mean |
-| 16 | 21.0 | 219 | Consistent |
-| 17 | 24.0 | 236 | Above mean |
-| 18 | 22.0 | 205 | Consistent |
+| 9 | 22.0 | 229 | Below mean |
+| 10 | 28.0 | 260 | Above mean |
+| 11 | 29.0 | 294 | Above mean |
+| 12 | 28.0 | 269 | Above mean |
+| 13 | 21.0 | 216 | Below mean |
+| 14 | 24.0 | 216 | Below mean |
+| 15 | 24.0 | 243 | Below mean |
+| 16 | 21.0 | 219 | Below mean |
+| 17 | 24.0 | 236 | Below mean |
+| 18 | 22.0 | 205 | Below mean |
 | 19 | 19.0 | 199 | Below mean |
-| 20 | 28.0 | 284 | Solid |
+| 20 | 28.0 | 284 | Above mean |
 | **Mean** | **25.10** | **247** | **15x better than random (1.7)** |
 
 3 out of 20 episodes beat the human baseline of 31.8 (ep1: 34.0, ep5: 32.0, ep7: 33.0).
@@ -279,7 +288,7 @@ python compare.py
 
 | Member | Contribution |
 |---|---|
-| **Victoria Fakunle** | train.py (average hyperparams), play.py, compare.py, 10 experiments + expBEST, gameplay video, repo setup, README |
+| **Victoria Fakunle** | train.py (average hyperparams), compare.py, 10 experiments, repo setup, README |
 | **Pretty Ntakirutimana** | train.py (lower hyperparams), 10 experiments including 500K expBEST run |
 | **Erneste** | train.py (higher hyperparams), 10 experiments |
 
