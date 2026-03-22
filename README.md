@@ -302,7 +302,7 @@ python compare.py
 |---|---|
 | **Victoria Fakunle** | train.py (average hyperparams), compare.py, 10 experiments, repo setup, README |
 | **Pretty Ntakirutimana** | train.py (lower hyperparams), 10 experiments including 500K expBEST run |
-| **Erneste** | train.py (higher hyperparams), 10 experiments |
+| **Erneste** | train.py (higher hyperparams), 10 experiments, and play.py script |
 
 ---
 
