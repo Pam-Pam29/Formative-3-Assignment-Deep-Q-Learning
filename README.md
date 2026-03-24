@@ -1,7 +1,9 @@
 # DQN Breakout — Group Hyperparameter Experiment
 **Formative 3 · Deep Q-Learning · Stable Baselines 3 + Gymnasium**
 
----
+## Team Task Sheet
+
+ [View Team Task Sheet](https://docs.google.com/spreadsheets/d/1-sGXzd-PgV1C9LwHrA1DVF8Wd0dy_XH-1waI9iPbzaQ/edit?usp=sharing)---
 
 ## Group Members
 
@@ -10,6 +12,7 @@
 | **Victoria Fakunle** | Average Hyperparameters | lr=0.0001–0.0003, γ=0.97–0.99, batch=32–64 |
 | **Pretty Ntakirutimana** | Lower Hyperparameters | lr=0.00001–0.00005, γ=0.90–0.95, batch=16–32 |
 | **Erneste** | Higher Hyperparameters | lr=0.0005–0.001, γ=0.990–0.999, batch=128–256 |
+
 
 ---
 
